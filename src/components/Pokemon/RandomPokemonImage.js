@@ -10,7 +10,7 @@ function RandomPokemonImage({ pokemons, randomIndex, loading }) {
   }
 
   const randomPokemon = pokemons[randomIndex]
-  const fullImageUrl = `http://localhost:3000${randomPokemon.imageUrl.replace(
+  const fullImageUrl = `https://cautious-pancake-1.onrender.com${randomPokemon.imageUrl.replace(
     '../',
     '/'
   )}`
