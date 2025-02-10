@@ -12,7 +12,7 @@ function HomePage() {
       {/* Header Section */}
       <header className=' flex flex-col items-center justify-center bg-black-primary text-orange-dark'>
         <h1 className='pt-12 pb-8 pl-8 pr-8 text-6xl font-bold text-blue-light'>
-          Pokémon of the Day
+          Pokémon Roller
         </h1>
         <img
           src={headerImage}
