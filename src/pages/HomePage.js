@@ -2,7 +2,7 @@
 import React from 'react'
 import colors from '../data/ColorData'
 import MainPokemon from '../components/MainPokemon'
-import headerImage from '../assets/header_image.jpeg'
+import TitleImage from '../assets/title_image.svg'
 
 function HomePage() {
   return (
@@ -10,16 +10,17 @@ function HomePage() {
       className={`min-h-screen flex flex-col bg-brown-dark ${colors.orange_light}`}
     >
       {/* Header Section */}
-      <header className=' flex flex-col items-center justify-center bg-black-primary text-orange-dark'>
-        <h1 className='pt-12 pb-8 pl-8 pr-8 text-6xl font-bold text-blue-light'>
-          Pokémon Roller
-        </h1>
-        <img
-          src={headerImage}
-          alt='Pokémon Logo'
-          className='mx-auto rounded-[4px]'
-          style={{ width: '26em', height: '10em', objectFit: 'cover' }}
-        />
+      <header className='flex flex-col items-center justify-center bg-black-primary text-orange-dark'>
+        <div className='flex items-center space-x-3 md:space-x-6 pt-8 pb-6 px-4 md:pt-12 md:pb-8 md:px-8'>
+          <img
+            src='/title_image.svg'
+            alt='Pokémon Roller Logo'
+            className='w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16'
+          />
+          <h1 className='text-3xl sm:text-4xl md:text-6xl font-bold text-blue-light text-center'>
+            Pokémon Randomizer
+          </h1>
+        </div>
       </header>
 
       {/* Navigation Bar */}
