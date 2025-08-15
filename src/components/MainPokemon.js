@@ -26,6 +26,29 @@ function MainPokemon() {
     'Generation IX',
   ]
 
+  // Convert to roman
+  function romanNumeral(number) {
+    const romanMap = [
+      { value: 10, numeral: 'X' },
+      { value: 9, numeral: 'IX' },
+      { value: 8, numeral: 'VIII' },
+      { value: 7, numeral: 'VII' },
+      { value: 6, numeral: 'VI' },
+      { value: 5, numeral: 'V' },
+      { value: 4, numeral: 'IV' },
+      { value: 3, numeral: 'III' },
+      { value: 2, numeral: 'II' },
+      { value: 1, numeral: 'I' },
+    ]
+
+    for (let i = 0; i < romanMap.length; i++) {
+      if (number >= romanMap[i].value) {
+        return romanMap[i].numeral
+      }
+    }
+    return ''
+  }
+
   // Fetch Pokémon data on mount
   useEffect(() => {
     const getPokemons = async () => {
@@ -87,49 +110,73 @@ function MainPokemon() {
             }`}
           >
             <RandomPokemonImage
-              pokemons={filteredPokemons} // show filtered Pokémon
+              pokemons={filteredPokemons}
               randomIndex={randomIndex}
               loading={loading}
             />
           </div>
+          {/* Generation Badge */}
+          {filteredPokemons.length && randomIndex !== null && (
+            <button
+              className='mt-4 px-3 py-1 rounded-full bg-yellow-400 text-gray-900 font-semibold shadow-md text-sm md:text-base'
+              onClick={() => setListOpen(true)}
+            >
+              Generation{' '}
+              {romanNumeral(filteredPokemons[randomIndex].generation)}
+            </button>
+          )}
         </div>
-        <div className='p-8 -translate-y-6 md:-translate-y-12'>
-          <RandomPokemonRerollButton
-            className='w-12 h-12 md:w-16 md:h-16'
-            onReroll={rerollPokemon}
-          />
+        <div className='relative'>
+          <div className='absolute top-[-1rem] left-[-1rem] md:top-[2rem] md:left-[2rem]'>
+            <RandomPokemonRerollButton
+              className='w-12 h-12 md:w-16 md:h-16'
+              onReroll={rerollPokemon}
+            />
+          </div>
         </div>
       </div>
 
       {/* Right: Generation buttons */}
-      <div className='hidden md:flex flex-col space-y-4 fixed top-65 right-96'>
-        {/* XS Popout */}
-        <button
-          className='md:hidden px-4 py-2 bg-blue-500 text-white rounded-lg mb-2'
-          onClick={() => setListOpen(true)}
-        >
-          Show Pokémon List
-        </button>
-        {/* Animation*/}
+      <div className='relative flex flex-col space-y-4'>
+        {/* Mobile XS Popout Button */}
+        <div className='md:hidden flex justify-center mt-10 w-full'>
+          <button
+            className='w-96 bg-green-500 text-white rounded-lg font-bold shadow-md py-2'
+            onClick={() => setListOpen(true)}
+          >
+            Show Pokémon List
+          </button>
+        </div>
+
+        {/* Mobile Modal / Animation */}
         <Transition
           show={listOpen}
-          enter='transition transform ease-out duration-300'
-          enterFrom='opacity-0 scale-95'
-          enterTo='opacity-100 scale-100'
-          leave='transition transform ease-in duration-200'
-          leaveFrom='opacity-100 scale-100'
-          leaveTo='opacity-0 scale-95'
+          enter='transition ease-out duration-500'
+          enterFrom='opacity-0 -translate-y-20'
+          enterTo='opacity-100 translate-y-0'
+          leave='transition ease-in duration-300'
+          leaveFrom='opacity-100 translate-y-0'
+          leaveTo='opacity-0 -translate-y-20'
         >
-          <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/50 md:hidden'>
-            <div className='bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 shadow-2xl relative'>
-              <button
-                onClick={() => setListOpen(false)}
-                className='absolute top-4 right-4 text-gray-500 hover:text-gray-800'
-              >
-                ✕
-              </button>
-              <h2 className='text-lg font-bold mb-4'>Pokémon Generations</h2>
-              <div className='space-y-2 max-h-[60vh] overflow-y-auto'>
+          {/* Overlay */}
+          <div className='fixed inset-0 z-50 flex items-start justify-center pt-24 bg-black/30 md:hidden'>
+            {/* Modal container with white background */}
+            <div className='bg-white rounded-2xl w-full max-w-md shadow-2xl relative'>
+              {/* Dark header so title & close are visible */}
+              <div className='flex justify-between items-center p-4 bg-gray-100 rounded-t-2xl'>
+                <h2 className='text-lg font-bold text-white'>
+                  Pokémon Generations
+                </h2>
+                <button
+                  onClick={() => setListOpen(false)}
+                  className='text-white hover:text-gray-300 font-bold text-2xl p-2'
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Modal body with white background */}
+              <div className='p-6 space-y-2 max-h-[60vh] overflow-y-auto'>
                 {generations.map((generation, idx) => (
                   <button
                     key={idx}
@@ -137,7 +184,13 @@ function MainPokemon() {
                       handleGenerationSelect(idx + 1)
                       setListOpen(false)
                     }}
-                    className='block w-full text-left px-4 py-2 rounded-lg hover:bg-yellow-200 dark:hover:bg-yellow-400 font-semibold'
+                    className={`w-full text-left px-3 py-2 rounded-lg shadow-md font-bold transition-colors duration-200
+              ${
+                selectedGeneration === idx + 1
+                  ? 'bg-green-700 text-white'
+                  : 'bg-green-500 text-white hover:bg-green-600 hover:text-white'
+              }
+            `}
                   >
                     {generation}
                   </button>
@@ -147,19 +200,19 @@ function MainPokemon() {
           </div>
         </Transition>
 
-        {/* MD+ Static List */}
-        <ul className='hidden md:block text-left text-lg md:text-xl space-y-2 ml-8'>
+        {/* Desktop Static List */}
+        <ul className='hidden md:block text-left text-lg md:text-xl space-y-2 ml-8 fixed top-[27rem] right-96 transform -translate-y-1/2'>
           {generations.map((generation, index) => (
             <li key={index}>
               <button
                 onClick={() => handleGenerationSelect(index + 1)}
                 className={`w-full text-left px-3 py-2 rounded-lg shadow-md font-bold transition-colors duration-200
-                  ${
-                    selectedGeneration === index + 1
-                      ? 'bg-green-700 text-white'
-                      : 'bg-green-500 text-white hover:bg-green-600'
-                  }
-                `}
+        ${
+          selectedGeneration === index + 1
+            ? 'bg-green-700 text-white'
+            : 'bg-green-500 text-white hover:bg-green-600'
+        }
+      `}
               >
                 {generation}
               </button>
