@@ -1,4 +1,5 @@
-const API_BASE_URL = 'https://cautious-pancake-1.onrender.com/api/pokemon'
+const API_BASE_URL =
+  'https://salty-evangeline-clement123-8d4b0dca.koyeb.app/api/pokemon'
 
 export const fetchPokemons = async () => {
   try {

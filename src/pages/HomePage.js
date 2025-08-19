@@ -1,8 +1,6 @@
 // src/layouts/BasicLayout.js
-import React from 'react'
 import colors from '../data/ColorData'
 import MainPokemon from '../components/MainPokemon'
-import TitleImage from '../assets/title_image.svg'
 
 function HomePage() {
   return (

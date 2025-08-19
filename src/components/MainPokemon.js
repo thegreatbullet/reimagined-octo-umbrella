@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { fetchPokemons } from '../data/pokemonData'
 import RandomPokemonImage from './Pokemon/RandomPokemonImage'
 import RandomPokemonRerollButton from './Pokemon/RandomPokemonRerollButton'
-import RandomPokemonText from './Pokemon/RandomPokemonText'
 import { Transition } from '@headlessui/react'
 
 function MainPokemon() {
