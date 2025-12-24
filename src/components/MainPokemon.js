@@ -102,10 +102,10 @@ function MainPokemon() {
     <div className='flex flex-col md:flex-row justify-center md:space-x-12'>
       {/* Left: Pokémon card + reroll */}
       <div className='flex-1 flex flex-col items-center mb-6 md:mb-0'>
-        <div className='mb-0 p-6 md:p-12'>
+        <div className='mb-0 p-6 md:p-2 -mt-24'>
           <div
             className={`transition-transform duration-300 ${
-              animate ? 'scale-105 -translate-y-2' : 'scale-100 translate-y-0'
+              animate ? 'scale-105 -translate-y-6' : 'scale-100 translate-y-0'
             }`}
           >
             <RandomPokemonImage

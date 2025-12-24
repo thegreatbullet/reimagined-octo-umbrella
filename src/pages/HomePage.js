@@ -1,5 +1,5 @@
 // src/layouts/BasicLayout.js
-import colors from '../data/ColorData'
+import colors from '../data/colorData'
 import MainPokemon from '../components/MainPokemon'
 
 function HomePage() {
@@ -22,7 +22,7 @@ function HomePage() {
       </header>
 
       {/* Navigation Bar */}
-      <nav className='bg-white-light w-full py-1 flex justify-center'>
+      <nav className='bg-white-light w-full py-2 flex justify-center'>
         {/* Add navigation links here */}
       </nav>
 

@@ -1,26 +1,5 @@
 import React from 'react'
-
-// Map each type to a full Tailwind class: background + text color
-const typeClasses = {
-  Normal: 'bg-gray-400 text-gray-900',
-  Fire: 'bg-red-500 text-white',
-  Water: 'bg-blue-500 text-white',
-  Grass: 'bg-green-500 text-white',
-  Electric: 'bg-yellow-400 text-gray-900',
-  Ice: 'bg-cyan-200 text-gray-900',
-  Fighting: 'bg-orange-700 text-white',
-  Poison: 'bg-purple-500 text-white',
-  Ground: 'bg-yellow-700 text-white',
-  Flying: 'bg-indigo-300 text-gray-900',
-  Psychic: 'bg-pink-500 text-white',
-  Bug: 'bg-green-700 text-white',
-  Rock: 'bg-gray-700 text-white',
-  Ghost: 'bg-indigo-900 text-white',
-  Dragon: 'bg-purple-800 text-white',
-  Dark: 'bg-gray-900 text-white',
-  Steel: 'bg-gray-500 text-white',
-  Fairy: 'bg-pink-300 text-gray-900',
-}
+import typeColors from '../../data/typeColors'
 
 function RandomPokemonImage({ pokemons, randomIndex, loading }) {
   if (loading) return <p>Loading Pokémon...</p>
@@ -28,35 +7,65 @@ function RandomPokemonImage({ pokemons, randomIndex, loading }) {
     return <p>No Pokémon data available</p>
 
   const randomPokemon = pokemons[randomIndex]
-  const fullImageUrl = `https://cautious-pancake-1.onrender.com${randomPokemon.imageUrl.replace(
-    '../',
-    '/'
-  )}`
+  const fullImageUrl = randomPokemon.imageUrl
+  const firstType = randomPokemon.type[0]?.toLowerCase()
+
+  // Unique pill for Pokémon name
+  const namePillBg = '#FFD700' // gold color for name pill
+  const namePillColor = '#111111' // dark text
 
   return (
     <div className='flex flex-col items-center mt-6'>
-      <div className='bg-gray-800 rounded-2xl shadow-2xl p-10 md:p-8 flex flex-col items-center transition-transform hover:scale-105'>
-        <img
-          src={fullImageUrl}
-          alt={randomPokemon.name}
-          className='w-48 h-48 object-cover rounded-xl shadow-md'
-        />
+      <div className='bg-[#002B42] rounded-2xl shadow-2xl p-7 md:p-16 flex flex-col items-center transition-transform hover:scale-105'>
+        {/* Image */}
+        <div className='w-48 h-48 flex items-center justify-center rounded-xl overflow-hidden'>
+          <img
+            src={fullImageUrl}
+            alt={randomPokemon.name}
+            className='w-full h-full object-contain'
+          />
+        </div>
 
-        <div className='mt-10 flex flex-wrap items-center justify-center space-x-2 min-w-[180px]'>
-          {/* Pokémon name */}
-          <span className='px-4 py-2 bg-yellow-300 md:bg-yellow-400 text-gray-800 font-semibold rounded-full text-xl md:text-2xl capitalize shadow-sm'>
+        {/* Name + Types */}
+        <div className='mt-10 flex flex-col items-center space-y-2 w-[220px]'>
+          {/* Pokémon name pill (unique style) */}
+          <span
+            className='px-4 py-2 font-bold rounded-full text-xl capitalize shadow-md text-center w-full truncate'
+            style={{
+              backgroundColor: namePillBg,
+              color: namePillColor,
+            }}
+          >
             {randomPokemon.name}
           </span>
 
           {/* Type pills */}
-          {randomPokemon.type.map((t, idx) => (
-            <span
-              key={idx}
-              className={`px-3 py-1 rounded-full font-semibold text-sm md:text-base capitalize ${typeClasses[t]}`}
-            >
-              {t}
-            </span>
-          ))}
+          <div className='flex justify-center gap-2 w-full'>
+            {Array.from({ length: 3 }).map((_, idx) => {
+              const type = randomPokemon.type[idx]
+              if (!type)
+                return (
+                  <span key={idx} className='invisible w-16 min-w-[5rem]'>
+                    Placeholder
+                  </span>
+                )
+
+              const key = type.toLowerCase()
+              const bg = typeColors[key]?.bg || '#777777'
+              const textColor =
+                typeColors[key]?.text === 'dark' ? '#111111' : '#FFFFFF'
+
+              return (
+                <span
+                  key={idx}
+                  className='px-3 py-1 rounded-full font-semibold text-sm capitalize text-center w-16 min-w-[5rem]'
+                  style={{ backgroundColor: bg, color: textColor }}
+                >
+                  {type}
+                </span>
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>
