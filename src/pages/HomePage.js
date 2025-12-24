@@ -1,5 +1,5 @@
 // src/layouts/BasicLayout.js
-import colors from '../data/colorData'
+import colors from '../data/colorData.js'
 import MainPokemon from '../components/MainPokemon'
 
 function HomePage() {
