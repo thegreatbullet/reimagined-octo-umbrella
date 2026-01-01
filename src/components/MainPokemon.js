@@ -25,6 +25,7 @@ function MainPokemon() {
     'Generation VIII',
     'Generation IX',
   ]
+  const SHINY_CHANCE = 1 / 4096 // classic shiny odds
 
   // Convert to roman
   function romanNumeral(number) {
@@ -79,6 +80,7 @@ function MainPokemon() {
         newIndex = Math.floor(Math.random() * filteredPokemons.length)
       } while (newIndex === randomIndex && filteredPokemons.length > 1) // prevent same index
 
+      setIsShiny(Math.random() < SHINY_CHANCE)
       setRandomIndex(newIndex)
       setAnimate(true)
       setTimeout(() => setAnimate(false), 300)
@@ -96,6 +98,7 @@ function MainPokemon() {
     // Pick a random Pokémon from the new generation
     if (genPokemons.length > 0) {
       setRandomIndex(Math.floor(Math.random() * genPokemons.length))
+      setIsShiny(Math.random() < SHINY_CHANCE)
     }
   }
 
@@ -103,6 +106,8 @@ function MainPokemon() {
     filteredPokemons.length > 0 && randomIndex !== null
       ? filteredPokemons[randomIndex]
       : null
+
+  const [isShiny, setIsShiny] = useState(false)
 
   return (
     <div className='flex flex-col md:flex-row justify-center md:space-x-12'>
@@ -114,11 +119,21 @@ function MainPokemon() {
               animate ? 'scale-105 -translate-y-6' : 'scale-100 translate-y-0'
             }`}
           >
-            <RandomPokemonImage
-              pokemons={filteredPokemons}
-              randomIndex={randomIndex}
-              loading={loading}
-            />
+            <div className='relative'>
+              {/* ✨ SHINY BADGE */}
+              {isShiny && (
+                <div className='absolute top-2 right-2 z-10 px-2 py-1 text-xs font-bold rounded-full bg-yellow-300 text-yellow-900 shadow animate-pulse'>
+                  ✨ SHINY
+                </div>
+              )}
+
+              <RandomPokemonImage
+                pokemons={filteredPokemons}
+                randomIndex={randomIndex}
+                loading={loading}
+                isShiny={isShiny}
+              />
+            </div>
           </div>
           {/* Stats Panel */}
           {currentPokemon && <PokemonStatsPanel pokemon={currentPokemon} />}

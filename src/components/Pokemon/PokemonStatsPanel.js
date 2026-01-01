@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 const MAX_STAT = 150
 
 const typeBarColors = {
@@ -34,14 +36,35 @@ function StatRow({ label, value, type }) {
 }
 
 export default function PokemonStatsPanel({ pokemon }) {
+  const [isShiny, setIsShiny] = useState(false)
+
+  useEffect(() => {
+    // 1 in 4096 shiny chance
+    const roll = Math.floor(Math.random() * 4096)
+    setIsShiny(roll === 0)
+  }, [pokemon?.number])
+
   if (!pokemon || !pokemon.stats) return null
 
   const mainType = pokemon.types?.[0] || 'default'
   const { hp = 0, attack = 0, defense = 0, speed = 0 } = pokemon.stats
 
   return (
-    <div className='w-full max-w-sm mt-4 p-4 bg-white rounded-2xl shadow-md'>
-      <h3 className='text-lg font-bold mb-4 text-center'>Pokédex Stats</h3>
+    <div
+      className={`w-full max-w-sm mt-4 p-4 rounded-2xl shadow-md transition-all duration-700
+        ${
+          isShiny
+            ? 'bg-yellow-50 ring-4 ring-yellow-400 animate-pulse'
+            : 'bg-white'
+        }
+      `}
+    >
+      <h3 className='text-lg font-bold mb-2 text-center'>
+        Pokédex Stats
+        {isShiny && (
+          <span className='ml-2 text-yellow-500 animate-bounce'>✨ Shiny!</span>
+        )}
+      </h3>
 
       <StatRow label='HP' value={hp} type={mainType} />
       <StatRow label='Attack' value={attack} type={mainType} />
