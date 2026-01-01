@@ -3,6 +3,7 @@ import { fetchPokemons } from '../data/pokemonData'
 import RandomPokemonImage from './Pokemon/RandomPokemonImage'
 import RandomPokemonRerollButton from './Pokemon/RandomPokemonRerollButton'
 import { Transition } from '@headlessui/react'
+import PokemonStatsPanel from './Pokemon/PokemonStatsPanel'
 
 function MainPokemon() {
   const [pokemons, setPokemons] = useState([])
@@ -98,6 +99,11 @@ function MainPokemon() {
     }
   }
 
+  const currentPokemon =
+    filteredPokemons.length > 0 && randomIndex !== null
+      ? filteredPokemons[randomIndex]
+      : null
+
   return (
     <div className='flex flex-col md:flex-row justify-center md:space-x-12'>
       {/* Left: Pokémon card + reroll */}
@@ -114,6 +120,9 @@ function MainPokemon() {
               loading={loading}
             />
           </div>
+          {/* Stats Panel */}
+          {currentPokemon && <PokemonStatsPanel pokemon={currentPokemon} />}
+
           {/* Generation Badge */}
           {filteredPokemons.length && randomIndex !== null && (
             <button
