@@ -5,7 +5,7 @@ const RandomPokemonContext = createContext()
 export const RandomPokemonProvider = ({ children }) => {
   const [randomIndex, setRandomIndex] = useState(null)
 
-  // Function to generate a new random index
+  // Reroll Pokemon Function
   const rerollPokemon = (pokemonCount) => {
     const newIndex = Math.floor(Math.random() * pokemonCount)
     setRandomIndex(newIndex)
@@ -18,5 +18,4 @@ export const RandomPokemonProvider = ({ children }) => {
   )
 }
 
-// Custom hook to access the context
 export const useRandomPokemon = () => useContext(RandomPokemonContext)

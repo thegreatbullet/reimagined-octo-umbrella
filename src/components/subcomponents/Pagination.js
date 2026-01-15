@@ -1,4 +1,3 @@
-// src/components/Pagination.js
 import React from 'react'
 
 function Pagination({ currentPage, totalPages, onPrevious, onNext }) {

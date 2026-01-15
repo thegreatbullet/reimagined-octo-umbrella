@@ -1,4 +1,3 @@
-// src/Card.js
 import React from 'react'
 
 function Card({ pokemon }) {

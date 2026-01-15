@@ -8,8 +8,6 @@ export const fetchPokemons = async () => {
     }
 
     const result = await response.json()
-
-    // Extract the array of Pokémon
     const pokemons = result.pokemons || []
 
     // Map generation based on Pokémon number
@@ -31,6 +29,6 @@ export const fetchPokemons = async () => {
     return pokemonsWithGeneration
   } catch (error) {
     console.error('Error fetching Pokémon data:', error)
-    return [] // return empty array so frontend doesn't break
+    return []
   }
 }

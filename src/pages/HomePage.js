@@ -27,16 +27,16 @@ function HomePage() {
           backgroundColor: colors.black.primary,
           color: colors.orange.dark,
         }}
-        className='flex flex-col items-center justify-center'
+        className='hidden md:flex flex-col items-center justify-center'
       >
-        <div className='flex items-center space-x-3 md:space-x-6 pt-8 pb-6 px-4 md:pt-12 md:pb-8 md:px-8'>
+        <div className='flex items-center space-x-2 md:space-x-4 pt-4 pb-3 px-3 md:pt-6 md:pb-4 md:px-6'>
           <img
             src='/title_image.svg'
             alt='Pokémon Roller Logo'
             className='w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16'
           />
           <h1
-            className='text-3xl sm:text-4xl md:text-6xl font-bold text-center'
+            className='text-3xl sm:text-4xl md:text-5xl font-bold text-center'
             style={{ color: colors.blue.light }}
           >
             Pokémon Randomizer
@@ -46,14 +46,12 @@ function HomePage() {
 
       {/* Navigation Bar */}
       <nav
-        className='w-full py-2 flex justify-center'
+        className='w-full py-1 md:py-2 flex justify-center'
         style={{ backgroundColor: colors.white.light }}
-      >
-        {/* Add navigation links here */}
-      </nav>
+      ></nav>
 
       {/* Main Content */}
-      <main className='flex-grow flex items-center justify-center'>
+      <main className='flex-grow flex items-center justify-center md:mt-4'>
         <MainPokemon />
       </main>
 

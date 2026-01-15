@@ -5,6 +5,26 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        shake: 'shake 0.3s ease-in-out',
+        'slide-fade-in': 'slideFadeIn 0.5s ease-out forwards',
+        'hover-bounce': 'hoverBounce 0.4s ease-in-out infinite',
+      },
+      keyframes: {
+        slideFadeIn: {
+          '0%': { opacity: 0, transform: 'translateY(-2rem)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '25%': { transform: 'translateX(-0.5rem)' },
+          '75%': { transform: 'translateX(0.5rem)' },
+        },
+        hoverBounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5%)' }, // small upward bounce
+        },
+      },
       colors: {
         red: {
           light: '#E84855',

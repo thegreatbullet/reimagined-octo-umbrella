@@ -1,4 +1,3 @@
-// src/pages/ContactPage.js
 import React from 'react'
 
 function ContactPage() {
