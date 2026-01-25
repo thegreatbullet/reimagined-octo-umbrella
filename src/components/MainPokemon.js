@@ -106,7 +106,7 @@ function MainPokemon() {
                 if (fallbackData.length > 0) {
                   data = fallbackData
                   console.log(
-                    'Fallback: using cached data despite fetch failure'
+                    'Fallback: using cached data despite fetch failure',
                   )
                 } else {
                   console.warn('Cached data empty, cannot fallback')
@@ -114,7 +114,7 @@ function MainPokemon() {
               } catch (parseErr) {
                 console.error(
                   'Fallback failed: cannot parse cached data',
-                  parseErr
+                  parseErr,
                 )
               }
             } else {
@@ -153,7 +153,7 @@ function MainPokemon() {
 
     if (genPokemons.length > 0) {
       const savedRoll = JSON.parse(
-        localStorage.getItem(LAST_ROLL_KEY) || 'null'
+        localStorage.getItem(LAST_ROLL_KEY) || 'null',
       )
       let index = Math.floor(Math.random() * genPokemons.length)
       let shiny = Math.random() < SHINY_CHANCE
@@ -171,7 +171,7 @@ function MainPokemon() {
       setIsShiny(shiny)
       localStorage.setItem(
         LAST_ROLL_KEY,
-        JSON.stringify({ generation, index, isShiny: shiny })
+        JSON.stringify({ generation, index, isShiny: shiny }),
       )
 
       // Update history
@@ -186,7 +186,7 @@ function MainPokemon() {
               imageUrl: current.imageUrl,
             },
             ...filtered,
-          ].slice(0, 6)
+          ]
           localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
           return updated
         })
@@ -217,11 +217,12 @@ function MainPokemon() {
         generation: selectedGeneration,
         index: newIndex,
         isShiny: shiny,
-      })
+      }),
     )
 
     // Update history
     const current = filteredPokemons[newIndex]
+    const FULL_HISTORY_MAX = 100
     if (current) {
       setHistory((prev) => {
         const filtered = prev.filter((p) => p.number !== current.number)
@@ -232,7 +233,7 @@ function MainPokemon() {
             imageUrl: current.imageUrl,
           },
           ...filtered,
-        ].slice(0, 6)
+        ].slice(0, FULL_HISTORY_MAX)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
         return updated
       })

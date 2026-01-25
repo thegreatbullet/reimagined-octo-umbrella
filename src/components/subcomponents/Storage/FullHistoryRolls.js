@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const FULL_MAX = 20
+const FULL_MAX = 15
 
 export default function FullHistoryModal({ history, onClose }) {
   const [currentPage, setCurrentPage] = useState(1)
@@ -44,20 +44,16 @@ export default function FullHistoryModal({ history, onClose }) {
 
         {/* Pokémon grid */}
         <div
-          className='flex-1 grid grid-cols-5 p-4 rounded-lg shadow-inner overflow-y-auto bg-red-600 border-red-700'
+          className='flex-1 grid grid-cols-5 gap-4 p-4 rounded-lg shadow-inner overflow-y-auto'
           style={{
-            gap: '16px',
-            alignContent: 'start',
+            gridTemplateRows: 'repeat(3, 1fr)', // 3 rows
           }}
         >
           {displayedHistory.map((p) => (
             <div
               key={p.number}
               title={p.name}
-              className='
-      flex flex-col items-center justify-center 
-      w-full aspect-square rounded-md 
-    '
+              className='flex flex-col items-center justify-center rounded-md bg-red-700'
             >
               <img
                 src={p.imageUrl}
@@ -66,7 +62,7 @@ export default function FullHistoryModal({ history, onClose }) {
               />
               <span
                 style={{ color: '#FFFFFF' }}
-                className='text-s font-bold text-gray-900 text-center truncate'
+                className='text-xs font-bold text-center truncate'
               >
                 {p.name}
               </span>
@@ -76,19 +72,52 @@ export default function FullHistoryModal({ history, onClose }) {
 
         {/* Pagination for Full Pokedex */}
         {totalPages > 1 && (
-          <div className='flex justify-center items-center gap-4 mt-4'>
+          <div className='flex justify-center items-center gap-6 mt-4'>
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-              className='bg-black text-white px-4 py-1 rounded hover:bg-gray-800 text-sm font-bold'
+              style={{
+                backgroundColor: '#FFFFFF',
+                color: '#B91C1C',
+                padding: '0.5rem 1.25rem',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                borderRadius: '0.375rem',
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = '#f5f5f5')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = '#FFFFFF')
+              }
+              className='bg-white text-white px-5 py-2 rounded hover:bg-gray-200 text-base font-bold'
             >
               ◀
             </button>
-            <span className='text-sm font-bold text-gray-800'>
+            <span
+              style={{
+                color: '#FFFFFF',
+              }}
+              className='text-white text-lg font-bold'
+            >
               {currentPage}/{totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-              className='bg-black text-white px-4 py-1 rounded hover:bg-gray-800 text-sm font-bold'
+              style={{
+                backgroundColor: '#FFFFFF',
+                color: '#B91C1C',
+                padding: '0.5rem 1.25rem',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                borderRadius: '0.375rem',
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = '#f5f5f5')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = '#FFFFFF')
+              }
+              className='bg-white text-red-700 px-5 py-2 rounded hover:bg-gray-200 text-base font-bold'
             >
               ▶
             </button>
