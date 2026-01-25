@@ -47,7 +47,7 @@ export default function PreviousRolls({
                 key={`empty-${i}`}
                 className='flex justify-center items-center'
               />
-            )
+            ),
           )}
         </div>
 
@@ -55,13 +55,14 @@ export default function PreviousRolls({
         <div className='hidden md:flex gap-3 mt-4 w-full'>
           <button
             onClick={clearHistory}
-            className='flex-1 bg-[#f0f0e6] border-2 border-[#7fc27f] text-gray-800 font-semibold text-sm py-2 rounded-lg shadow-md hover:bg-[#e0e0d6] transition-colors'
+            className='flex-1 bg-[#7fc27f] border-2 border-[#7fc27f] text-white font-semibold text-sm py-2 rounded-lg shadow-md hover:bg-[#6bb26b] transition-colors'
           >
             Clear
           </button>
+
           <button
             onClick={() => setShowFullHistory(true)}
-            className='flex-1 bg-[#f0f0e6] border-2 border-[#60a5fa] text-gray-800 font-semibold text-sm py-2 rounded-lg shadow-md hover:bg-[#e0e0d6] transition-colors'
+            className='flex-1 bg-[#60a5fa] border-2 border-[#60a5fa] text-white font-semibold text-sm py-2 rounded-lg shadow-md hover:bg-[#4d8de0] transition-colors'
           >
             Full History
           </button>
@@ -181,7 +182,7 @@ export default function PreviousRolls({
                     key={`empty-${i}`}
                     className='flex justify-center items-center'
                   />
-                )
+                ),
               )}
             </div>
 

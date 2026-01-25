@@ -18,13 +18,20 @@ export default function FullHistoryModal({ history, onClose }) {
           rounded-xl p-6 shadow-2xl
         '
         style={{
-          backgroundColor: '#f0f3e8',
-          border: '4px solid #ccff66',
+          backgroundColor: '#B91C1C',
+          border: '1px solid black',
         }}
       >
         {/* Header */}
         <div className='flex justify-between items-center mb-6'>
-          <h2 className='font-bold text-xl text-gray-800 tracking-wide'>
+          <h2
+            style={{
+              color: '#FFFFFF', // bright white
+              fontSize: '2rem', // makes it bigger
+              textShadow: '1px 1px 2px rgba(0,0,0,0.5)', // optional glow
+            }}
+            className='font-bold tracking-wide'
+          >
             Full Pokédex History
           </h2>
           <button
@@ -37,11 +44,9 @@ export default function FullHistoryModal({ history, onClose }) {
 
         {/* Pokémon grid */}
         <div
-          className='flex-1 grid grid-cols-5 p-4 rounded-lg shadow-inner overflow-y-auto'
+          className='flex-1 grid grid-cols-5 p-4 rounded-lg shadow-inner overflow-y-auto bg-red-600 border-red-700'
           style={{
             gap: '16px',
-            backgroundColor: '#e7e9dd',
-            border: '2px solid #b6e78c',
             alignContent: 'start',
           }}
         >
@@ -51,19 +56,18 @@ export default function FullHistoryModal({ history, onClose }) {
               title={p.name}
               className='
       flex flex-col items-center justify-center 
-      w-full aspect-square rounded-md shadow-md p-2
+      w-full aspect-square rounded-md 
     '
-              style={{
-                backgroundColor: '#fffde7',
-                border: '2px solid #d4f17a',
-              }}
             >
               <img
                 src={p.imageUrl}
                 alt={p.name}
                 className='w-16 h-16 object-contain mb-1'
               />
-              <span className='text-xs font-bold text-gray-900 text-center truncate'>
+              <span
+                style={{ color: '#FFFFFF' }}
+                className='text-s font-bold text-gray-900 text-center truncate'
+              >
                 {p.name}
               </span>
             </div>

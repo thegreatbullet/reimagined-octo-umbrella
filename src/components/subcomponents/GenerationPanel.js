@@ -62,13 +62,17 @@ export default function GenerationPanel({
                 onClick={() => handleGenerationSelect(index + 1)}
                 className={`flex items-center w-52 px-4 py-2 rounded-xl font-bold transition-all duration-200
                   bg-[#f8f8f8] border-4 ${generationBorders[index]} ${
-                  isSelected
-                    ? 'scale-110 bg-yellow-100 shadow-[0_0_15px_#facc15]'
-                    : 'hover:scale-105 hover:bg-gray-100'
-                }`}
+                    isSelected
+                      ? 'scale-110 bg-yellow-100 shadow-[0_0_15px_#facc15]'
+                      : 'hover:scale-105 hover:bg-gray-100'
+                  }`}
               >
-                <Pokeball active={isSelected} />
-                <span className='flex-1 text-left'>Generation {index + 1}</span>
+                <div className='flex items-center gap-x-2'>
+                  <Pokeball active={isSelected} />
+                  <span className='flex-1 text-left'>
+                    Generation {index + 1}
+                  </span>
+                </div>
               </button>
             </li>
           )
