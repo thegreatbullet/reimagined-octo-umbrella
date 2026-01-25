@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Pokémon Frontend Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A **production-ready frontend application** for interacting with the Pokémon Backend API. 
 
-## Available Scripts
+Users can view Pokémon, roll for random Pokémon, and track their roll history.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Project Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The project follows a **Component-Based Architecture** for maintainability and reusability:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* **Pages:** Top-level components representing routes (Home, Roll, History, Admin).
+* **Components:** Reusable UI elements (PokémonCard, RollButton, Navbar, Modal).
+* **Services:** Axios wrappers for interacting with backend API endpoints.
+* **Context / Hooks:** Global state and custom hooks for managing user session, rolls, and API data.
+* **Assets:** Images, icons, and static resources.
+* **Styles:** Tailwind or modular CSS for scoped styling.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## App Highlights
 
-### `npm run build`
+### Core Features
+* **View Pokémon:** List all available Pokémon, with pagination and filtering options.
+* **Roll Pokémon:** Get a random Pokémon using the backend roll API (rate-limited).
+* **History Tracking:** View the user's roll history and global roll data.
+* **Admin Panel:** Add or remove Pokémon (Admin users only).
+* **Responsive Design:** Works on mobile and desktop seamlessly.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Environment & API
+* Connects to backend API via environment variable: `REACT_APP_API_URL`.
+* Supports development (`localhost`) and production URLs.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tech Stack
 
-### `npm run eject`
+| Category              | Tools                                    |
+| :-------------------- | :--------------------------------------- |
+| **Framework**         | React (ESM, functional components)      |
+| **State Management**  | React Context / Hooks                    |
+| **HTTP Client**       | Axios / Fetch API                        |
+| **Routing**           | React Router                             |
+| **Styling**           | Tailwind CSS / CSS Modules               |
+| **Testing**           | Jest, React Testing Library              |
+| **Build Tool**        | Webpack           |
+| **Environment**       | Node.js, npm                             |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Installation
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 2. Development Mode
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 3. Production Build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the **MIT License**
