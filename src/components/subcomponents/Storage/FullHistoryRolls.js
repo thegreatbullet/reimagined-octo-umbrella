@@ -62,7 +62,7 @@ export default function FullHistoryModal({ history, onClose }) {
               />
               <span
                 style={{ color: '#FFFFFF' }}
-                className='text-xs font-bold text-center truncate'
+                className='text-s font-bold text-center truncate'
               >
                 {p.name}
               </span>
