@@ -2,7 +2,7 @@
 
 ---
 
-## Link to web app
+## Web App
 
 [Link to web app](https://reimagined-octo-umbrella-1.onrender.com/)
 
