@@ -53,7 +53,7 @@ export default function FullHistoryModal({ history, onClose }) {
             <div
               key={p.number}
               title={p.name}
-              className='flex flex-col items-center justify-center rounded-md bg-red-600'
+              className='flex flex-col items-center justify-center rounded-md bg-red-800 shadow-inner border border-red-900'
             >
               <img
                 src={p.imageUrl}
