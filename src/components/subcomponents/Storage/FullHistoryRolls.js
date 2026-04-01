@@ -10,82 +10,118 @@ export default function FullHistoryModal({ history, onClose }) {
   const displayedHistory = history.slice(startIndex, startIndex + FULL_MAX)
 
   return (
-    <div className='fixed inset-0 z-[1000] bg-black/60 flex items-center justify-center px-4'>
+    <div className='fixed inset-0 bg-black/70 flex justify-center items-center z-[1000]'>
       <div
-        className='relative w-full max-w-5xl h-[85vh] rounded-3xl border-4 border-red-700 bg-red-600 shadow-2xl p-5 md:p-6 flex flex-col'
-        onClick={(e) => e.stopPropagation()}
+        className='
+          relative
+          w-4/5 max-w-5xl h-4/5 flex flex-col
+          rounded-xl p-6 shadow-2xl
+        '
+        style={{
+          backgroundColor: '#dc2626',
+          border: '4px solid #991b1b',
+        }}
       >
-        {/* Top lights */}
-        <div className='flex justify-center gap-4 mb-4'>
-          <span className='w-3 h-3 rounded-full bg-blue-300 shadow-[0_0_6px_#60a5fa]' />
-          <span className='w-3 h-3 rounded-full bg-yellow-300' />
-          <span className='w-3 h-3 rounded-full bg-green-300' />
-        </div>
-
         {/* Header */}
-        <div className='flex justify-between items-center mb-4 px-1'>
+        <div className='flex justify-between items-center mb-6'>
           <h2
-            className='text-yellow-400 font-extrabold tracking-wider uppercase drop-shadow-[2px_2px_0_rgba(0,0,0,0.7)]'
-            style={{ fontSize: '2rem' }}
+            style={{
+              color: '#facc15',
+              fontSize: '2rem',
+              textShadow: '2px 2px 0 rgba(0,0,0,0.7)',
+            }}
+            className='font-bold tracking-wide'
           >
             Full Pokédex History
           </h2>
-
           <button
             onClick={onClose}
-            className='text-white text-2xl font-bold hover:text-gray-200 transition'
-            aria-label='Close full history'
+            className='text-white font-bold px-3 py-1 hover:text-gray-200 text-lg'
           >
-            ×
+            ✕
           </button>
         </div>
 
-        {/* White screen */}
-        <div className='flex-1 bg-white rounded-xl border-2 border-gray-400 shadow-inner p-4 overflow-y-auto'>
-          <div
-            className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4'
-            style={{ minHeight: '100%' }}
-          >
-            {displayedHistory.map((p) => (
-              <div
-                key={`${p.number}-${p.name}`}
-                title={p.name}
-                className='flex flex-col items-center justify-center rounded-lg bg-red-700 min-h-[8.5rem] p-3'
+        {/* Pokémon grid */}
+        <div
+          className='flex-1 grid grid-cols-5 gap-4 p-4 rounded-lg shadow-inner overflow-y-auto bg-white border-2 border-gray-400'
+          style={{
+            gridTemplateRows: 'repeat(3, 1fr)', // 3 rows
+          }}
+        >
+          {displayedHistory.map((p) => (
+            <div
+              key={p.number}
+              title={p.name}
+              className='flex flex-col items-center justify-center rounded-md bg-red-600'
+            >
+              <img
+                src={p.imageUrl}
+                alt={p.name}
+                className='w-16 h-16 object-contain mb-1'
+              />
+              <span
+                style={{ color: '#FFFFFF' }}
+                className='text-s font-bold text-center truncate'
               >
-                <img
-                  src={p.imageUrl}
-                  alt={p.name}
-                  className='w-20 h-20 object-contain mb-2'
-                />
-                <span className='text-white text-sm font-bold text-center truncate w-full'>
-                  {p.name}
-                </span>
-              </div>
-            ))}
-          </div>
+                {p.name}
+              </span>
+            </div>
+          ))}
         </div>
 
-        {/* Footer controls */}
+        {/* Pagination for Full Pokedex */}
         {totalPages > 1 && (
-          <div className='flex justify-center items-center gap-4 mt-5 flex-wrap'>
+          <div className='flex justify-center items-center gap-6 mt-4'>
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-              className='bg-[#f0f0e6] border-2 border-[#60a5fa] text-gray-800 font-semibold text-sm px-5 py-2 rounded-lg shadow-md hover:bg-[#e0e0d6] transition-colors disabled:opacity-50'
-              disabled={currentPage === 1}
+              style={{
+                backgroundColor: '#f0f0e6',
+                color: '#374151',
+                padding: '0.5rem 1.25rem',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                borderRadius: '0.375rem',
+                border: '2px solid #60a5fa',
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = '#e0e0d6')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = '#f0f0e6')
+              }
+              className='px-5 py-2 rounded text-base font-bold'
             >
-              ◀ Prev
+              ◀
             </button>
-
-            <span className='text-white text-lg font-bold min-w-[4rem] text-center'>
-              {currentPage} / {totalPages}
+            <span
+              style={{
+                color: '#FFFFFF',
+              }}
+              className='text-white text-lg font-bold'
+            >
+              {currentPage}/{totalPages}
             </span>
-
             <button
               onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-              className='bg-[#f0f0e6] border-2 border-[#60a5fa] text-gray-800 font-semibold text-sm px-5 py-2 rounded-lg shadow-md hover:bg-[#e0e0d6] transition-colors disabled:opacity-50'
-              disabled={currentPage === totalPages}
+              style={{
+                backgroundColor: '#f0f0e6',
+                color: '#374151',
+                padding: '0.5rem 1.25rem',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                borderRadius: '0.375rem',
+                border: '2px solid #60a5fa',
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = '#e0e0d6')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = '#f0f0e6')
+              }
+              className='px-5 py-2 rounded text-base font-bold'
             >
-              Next ▶
+              ▶
             </button>
           </div>
         )}
